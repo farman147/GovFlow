@@ -127,7 +127,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-slate-950 text-slate-900">
       <div className="grid min-h-screen lg:grid-cols-2">
 
-        {/* LEFT — GOVFLOW BRAND / INFORMATION */}
+        {/* LEFT — govflow BRAND / INFORMATION */}
         <div className="relative hidden overflow-hidden bg-slate-950 lg:flex">
           <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-emerald-500/20 blur-3xl" />
           <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl" />
@@ -146,7 +146,7 @@ export default function LoginPage() {
 
                 <div>
                   <p className="text-xl font-bold tracking-tight text-white">
-                    GovFlow
+                    govflow
                   </p>
                   <p className="text-xs text-slate-400">
                     Smart Government Services
@@ -208,7 +208,7 @@ export default function LoginPage() {
             {/* Footer */}
             <div className="flex items-center gap-2 text-xs text-slate-500">
               <ShieldCheck size={14} />
-              Secure access to GovFlow services
+              Secure access to govflow services
             </div>
           </div>
         </div>
@@ -229,7 +229,7 @@ export default function LoginPage() {
 
                 <div>
                   <p className="text-xl font-bold text-slate-900">
-                    GovFlow
+                    govflow
                   </p>
                   <p className="text-xs text-slate-500">
                     Smart Government Services
@@ -258,7 +258,7 @@ export default function LoginPage() {
                 </div>
 
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
-                  GovFlow Account
+                  govflow Account
                 </p>
 
                 <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
@@ -395,7 +395,7 @@ export default function LoginPage() {
                       Signing in...
                     </span>
                   ) : (
-                    'Sign in to GovFlow'
+                    'Sign in to govflow'
                   )}
                 </button>
               </form>
@@ -403,7 +403,7 @@ export default function LoginPage() {
               {/* Register */}
               <div className="mt-7 border-t border-slate-100 pt-6 text-center">
                 <p className="text-sm text-slate-500">
-                  Don't have a GovFlow account?{' '}
+                  Don't have a govflow account?{' '}
                   <Link
                     to="/register"
                     className="font-semibold text-emerald-700 transition hover:text-emerald-800"

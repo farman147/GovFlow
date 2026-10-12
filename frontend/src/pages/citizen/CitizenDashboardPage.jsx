@@ -153,7 +153,7 @@ export default function CitizenDashboardPage() {
 
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-blue-200">
                   <ShieldCheck size={14} />
-                  GovFlow Citizen Portal
+                  govflow Citizen Portal
                 </div>
 
                 <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
@@ -281,7 +281,7 @@ export default function CitizenDashboardPage() {
                 </h2>
 
                 <p className="mt-1 text-sm text-slate-500">
-                  A quick view of your current GovFlow activity.
+                  A quick view of your current govflow activity.
                 </p>
               </div>
 
@@ -699,7 +699,7 @@ export default function CitizenDashboardPage() {
                           <div className="flex items-center gap-2">
 
                             <p className="text-sm font-bold text-blue-950">
-                              Civic AI Assistant
+                              govflow Assistant
                             </p>
 
                             <span className="rounded-full bg-blue-200 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-blue-900">
@@ -932,7 +932,7 @@ export default function CitizenDashboardPage() {
                   </h2>
 
                   <p className="mt-1 text-sm text-slate-500">
-                    Services currently available through GovFlow.
+                    Services currently available through govflow.
                   </p>
                 </div>
 
@@ -1010,7 +1010,7 @@ export default function CitizenDashboardPage() {
                   <div className="flex flex-wrap items-center gap-2">
 
                     <h3 className="font-bold text-slate-900">
-                      Your GovFlow account
+                      Your govflow account
                     </h3>
 
                     <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-700">

@@ -385,7 +385,7 @@ export default function AppointmentsPage() {
                   </div>
 
                   <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
-                    GovFlow Citizen Portal
+                    govflow Citizen Portal
                   </span>
 
                 </div>
@@ -1072,7 +1072,7 @@ export default function AppointmentsPage() {
                   </div>
 
                   <span className="text-xs font-bold uppercase tracking-[0.18em] text-blue-800">
-                    GovFlow appointment
+                    govflow appointment
                   </span>
 
                 </div>

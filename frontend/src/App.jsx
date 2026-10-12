@@ -54,7 +54,7 @@ function StartupRedirect() {
      *
      * Therefore:
      *
-     * First time opening/reopening GovFlow:
+     * First time opening/reopening govflow:
      *     sessionStorage does not contain our key.
      *
      * If Chrome restored an old dashboard URL:

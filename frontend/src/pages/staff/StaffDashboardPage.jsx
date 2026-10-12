@@ -276,7 +276,7 @@ export default function StaffDashboardPage() {
       <StaffDashboardLayout title="Staff dashboard" subtitle="No counters assigned to your account.">
         <EmptyState
           title="No assigned counter"
-          message="Your staff account is not currently assigned to any counter in the GovFlow backend."
+          message="Your staff account is not currently assigned to any counter in the govflow backend."
         />
       </StaffDashboardLayout>
     );
@@ -311,7 +311,7 @@ export default function StaffDashboardPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">Welcome</p>
           <h2 className="mt-3 text-3xl font-bold">{user?.name || 'Staff member'}</h2>
           <p className="mt-2 max-w-2xl text-sm text-slate-200">
-            Monitor your assigned counter, serve active requests, and manage waiting tokens using the live GovFlow backend.
+            Monitor your assigned counter, serve active requests, and manage waiting tokens using the live govflow backend.
           </p>
         </div>
 

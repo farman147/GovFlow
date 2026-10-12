@@ -259,7 +259,7 @@ export default function ServicesPage() {
           <div className="relative z-10 max-w-3xl">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium backdrop-blur">
               <Sparkles size={14} />
-              GovFlow Service Center
+              govflow Service Center
             </div>
 
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
@@ -506,7 +506,7 @@ export default function ServicesPage() {
                         </h3>
 
                         <p className="text-xs text-slate-500">
-                          Information currently available in GovFlow
+                          Information currently available in govflow
                         </p>
                       </div>
                     </div>
@@ -893,7 +893,7 @@ export default function ServicesPage() {
 
                       <div>
                         <h3 className="font-bold text-slate-900">
-                          Ask GovFlow AI
+                          Ask govflow AI
                         </h3>
 
                         <p className="text-xs text-slate-500">
@@ -1019,7 +1019,7 @@ export default function ServicesPage() {
         {loading ? (
           <LoadingState
             title="Loading services"
-            message="Fetching the current GovFlow service catalog."
+            message="Fetching the current govflow service catalog."
           />
         ) : error ? (
           <ErrorState
@@ -1180,7 +1180,7 @@ export default function ServicesPage() {
 
                 <div>
                   <h3 className="font-bold text-slate-900">
-                    GovFlow AI assistance
+                    govflow AI assistance
                   </h3>
 
                   <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-500">
@@ -1197,7 +1197,7 @@ export default function ServicesPage() {
                   size={14}
                   className="text-emerald-600"
                 />
-                Connected to GovFlow backend
+                Connected to govflow backend
               </div>
             </div>
           </section>
@@ -1212,7 +1212,7 @@ export default function ServicesPage() {
         title="Create a token?"
         message={`You are about to take a token for ${
           selectedService?.name || 'this service'
-        }. This will create a real queue request in the GovFlow backend.`}
+        }. This will create a real queue request in the govflow backend.`}
         confirmLabel="Create token"
         onConfirm={handleConfirmCreateToken}
         onCancel={() => {

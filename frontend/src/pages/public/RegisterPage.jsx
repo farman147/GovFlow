@@ -33,7 +33,14 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   if (user) {
-    return <Navigate to="/citizen/dashboard" replace />;
+    const dashboardPath =
+      user.role === 'admin'
+        ? '/admin/dashboard'
+        : user.role === 'staff'
+          ? '/staff/dashboard'
+          : '/citizen/dashboard';
+
+    return <Navigate to={dashboardPath} replace />;
   }
 
   const validate = () => {
@@ -140,7 +147,7 @@ export default function RegisterPage() {
 
                 <div>
                   <p className="text-lg font-bold">
-                    GovFlow
+                    govflow
                   </p>
 
                   <p className="text-xs text-slate-400">
@@ -159,7 +166,7 @@ export default function RegisterPage() {
                 </h2>
 
                 <p className="mt-5 text-sm leading-7 text-slate-300">
-                  Create your GovFlow account to discover government
+                  Create your govflow account to discover government
                   services, submit requests, and track your queue activity
                   from one place.
                 </p>
@@ -178,7 +185,7 @@ export default function RegisterPage() {
                     </p>
 
                     <p className="mt-1 text-xs leading-5 text-slate-400">
-                      Find the services available through GovFlow.
+                      Find the services available through govflow.
                     </p>
                   </div>
                 </div>
@@ -210,7 +217,7 @@ export default function RegisterPage() {
                     </p>
 
                     <p className="mt-1 text-xs leading-5 text-slate-400">
-                      Your account is protected through GovFlow authentication.
+                      Your account is protected through govflow authentication.
                     </p>
                   </div>
                 </div>
@@ -220,7 +227,7 @@ export default function RegisterPage() {
 
             <div className="mt-10 border-t border-slate-800 pt-5">
               <p className="text-xs leading-5 text-slate-400">
-                GovFlow helps citizens interact with government services
+                govflow helps citizens interact with government services
                 through a centralized digital platform.
               </p>
             </div>
@@ -238,7 +245,7 @@ export default function RegisterPage() {
 
               <div>
                 <p className="text-lg font-bold text-slate-900">
-                  GovFlow
+                  govflow
                 </p>
 
                 <p className="text-xs text-slate-500">
@@ -259,11 +266,11 @@ export default function RegisterPage() {
               </p>
 
               <h1 className="mt-2 text-3xl font-bold text-slate-900">
-                Join GovFlow
+                Join govflow
               </h1>
 
               <p className="mt-2 text-sm leading-6 text-slate-500">
-                Create your account to access GovFlow citizen services.
+                Create your account to access govflow citizen services.
               </p>
 
             </div>
@@ -470,7 +477,7 @@ export default function RegisterPage() {
             {/* Security */}
             <div className="mt-6 flex items-center justify-center gap-2 border-t border-slate-100 pt-5 text-xs text-slate-500">
               <ShieldCheck size={15} />
-              Secure GovFlow account registration
+              Secure govflow account registration
             </div>
 
           </div>

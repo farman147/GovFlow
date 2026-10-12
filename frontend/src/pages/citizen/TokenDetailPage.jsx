@@ -594,7 +594,7 @@ export default function TokenDetailPage() {
                 </h3>
 
                 <p className="mt-1 text-sm text-slate-500">
-                  Important updates recorded by the GovFlow backend.
+                  Important updates recorded by the govflow backend.
                 </p>
               </div>
 
@@ -653,7 +653,7 @@ export default function TokenDetailPage() {
 
                     <p className="mt-1 text-sm leading-6 text-sky-800">
                       Keep this page available to monitor your queue position.
-                      GovFlow will automatically refresh the latest queue
+                      govflow will automatically refresh the latest queue
                       information while your token is active.
                     </p>
                   </div>
@@ -714,7 +714,7 @@ export default function TokenDetailPage() {
                     </h3>
 
                     <p className="mt-1 text-sm leading-6 text-emerald-800">
-                      Your GovFlow service request has been marked as
+                      Your govflow service request has been marked as
                       completed.
                     </p>
                   </div>

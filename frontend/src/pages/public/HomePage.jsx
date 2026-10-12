@@ -18,6 +18,7 @@ import {
   ShieldCheck,
   Sparkles,
   Users,
+  Workflow,
   X,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -35,8 +36,8 @@ const quickLinks = [
   },
   {
     icon: Users,
-    title: 'Citizen Portal',
-    text: 'Manage your requests',
+    title: 'Your Portal',
+    text: 'Manage your govflow activity',
     href: '/citizen',
   },
   {
@@ -121,7 +122,7 @@ const departments = [
   },
   {
     name: 'Public Services',
-    description: 'Discover additional services available through GovFlow.',
+    description: 'Discover additional services available through govflow.',
     icon: Landmark,
   },
 ];
@@ -135,7 +136,7 @@ const formatMinutes = (minutes) => {
 };
 
 export default function HomePage() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [services, setServices] = useState([]);
@@ -144,13 +145,21 @@ export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleForceLogin = (event) => {
+  const dashboardPath = user?.role === 'admin'
+    ? '/admin/dashboard'
+    : user?.role === 'staff'
+      ? '/staff/dashboard'
+      : '/citizen/dashboard';
+  const serviceAccessPath = user?.role === 'citizen'
+    ? '/citizen/services'
+    : dashboardPath;
+
+  const handlePortalAccess = (event) => {
     if (event) {
       event.preventDefault();
     }
 
-    logout(false);
-    navigate('/login?forced=1', { replace: true });
+    navigate(user ? dashboardPath : '/login', { replace: true });
   };
 
   useEffect(() => {
@@ -246,13 +255,13 @@ export default function HomePage() {
             className="flex items-center gap-3"
             onClick={closeMobileMenu}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#173b67] text-xl font-bold text-white shadow-sm">
-              G
+            <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#173b67] text-white shadow-sm">
+              <Workflow size={22} />
             </div>
 
             <div>
               <div className="text-xl font-bold tracking-tight text-[#173b67]">
-                GovFlow
+                govflow
               </div>
 
               <div className="text-[9px] font-semibold uppercase tracking-[0.22em] text-slate-500">
@@ -300,20 +309,20 @@ export default function HomePage() {
           </nav>
 
           {/* Desktop Auth */}
-          <div className="hidden items-center gap-3 sm:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <Link
-              to="/login?forced=1"
-              onClick={handleForceLogin}
+              to={user ? dashboardPath : '/login'}
+              onClick={handlePortalAccess}
               className="rounded-md border border-[#173b67] bg-white px-5 py-2.5 text-sm font-semibold text-[#173b67] transition hover:bg-blue-50"
             >
-              Sign In
+              {user ? 'Dashboard' : 'Sign In'}
             </Link>
 
             <Link
-              to="/register"
+              to={user ? dashboardPath : '/register'}
               className="rounded-md bg-[#173b67] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#102d50]"
             >
-              Register
+              {user ? 'Open portal' : 'Register'}
             </Link>
           </div>
 
@@ -321,7 +330,7 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-md border border-slate-200 p-2 text-slate-700 sm:hidden"
+            className="rounded-md border border-slate-200 p-2 text-slate-700 lg:hidden"
             aria-label="Toggle navigation"
           >
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -330,7 +339,7 @@ export default function HomePage() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-lg sm:hidden">
+          <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-lg lg:hidden">
             <div className="flex flex-col gap-1">
               <a
                 href="#home"
@@ -374,19 +383,19 @@ export default function HomePage() {
 
               <div className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-100 pt-4">
                 <Link
-                  to="/login?forced=1"
-                  onClick={handleForceLogin}
+                  to={user ? dashboardPath : '/login'}
+                  onClick={handlePortalAccess}
                   className="rounded-md border border-[#173b67] px-3 py-2.5 text-center text-sm font-semibold text-[#173b67]"
                 >
-                  Sign In
+                  {user ? 'Dashboard' : 'Sign In'}
                 </Link>
 
                 <Link
-                  to="/register"
+                  to={user ? dashboardPath : '/register'}
                   onClick={closeMobileMenu}
                   className="rounded-md bg-[#173b67] px-3 py-2.5 text-center text-sm font-semibold text-white"
                 >
-                  Register
+                  {user ? 'Open portal' : 'Register'}
                 </Link>
               </div>
             </div>
@@ -400,13 +409,9 @@ export default function HomePage() {
         ========================================================== */}
         <section
           id="home"
-          className="relative overflow-hidden border-b border-slate-200 bg-[#f7f9fc]"
+          className="relative overflow-hidden border-b border-slate-200 bg-[linear-gradient(120deg,#f7f9fc_0%,#eef3f8_60%,#e8f0f6_100%)]"
         >
-          {/* Decorative background */}
-          <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-blue-100/40 blur-3xl" />
-          <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-emerald-100/30 blur-3xl" />
-
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
+          <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-16">
             {/* Hero Text */}
             <div className="flex flex-col justify-center">
               <div className="mb-6 inline-flex w-fit items-center gap-2 border border-blue-200 bg-blue-50 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-[#173b67]">
@@ -414,7 +419,7 @@ export default function HomePage() {
                 Digital Public Services
               </div>
 
-              <h1 className="max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-3xl text-4xl font-bold leading-[1.1] text-slate-950 sm:text-5xl lg:text-5xl">
                 Access government
                 <span className="block text-[#173b67]">
                   services in one place
@@ -424,7 +429,7 @@ export default function HomePage() {
               <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
                 Find government services, understand the required documents,
                 manage your appointments and track your service progress
-                through GovFlow.
+                through govflow.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -437,15 +442,15 @@ export default function HomePage() {
                 </a>
 
                 <Link
-                  to="/register"
+                  to={user ? dashboardPath : '/register'}
                   className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-[#173b67] transition hover:border-[#173b67] hover:bg-blue-50"
                 >
-                  Create Account
+                  {user ? 'Open portal' : 'Create Account'}
                 </Link>
               </div>
 
               {/* Hero benefits */}
-              <div className="mt-9 grid gap-4 sm:grid-cols-2">
+              <div className="mt-9 hidden gap-4 sm:grid sm:grid-cols-2">
                 {[
                   'Service information',
                   'Required documents',
@@ -579,8 +584,8 @@ export default function HomePage() {
               return isInternal ? (
                 <Link
                   key={title}
-                  to={href === '/citizen' ? '/login?forced=1' : href}
-                  onClick={href === '/citizen' ? handleForceLogin : undefined}
+                  to={href === '/citizen' ? (user ? dashboardPath : '/login') : href}
+                  onClick={href === '/citizen' ? handlePortalAccess : undefined}
                   className="group flex items-center gap-4 border-b border-slate-200 px-5 py-6 transition hover:bg-white md:border-r lg:border-b-0"
                 >
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-slate-300 bg-white text-[#173b67] transition group-hover:border-[#173b67]">
@@ -589,7 +594,7 @@ export default function HomePage() {
 
                   <div>
                     <h3 className="font-semibold text-slate-900">
-                      {title}
+                      {href === '/citizen' ? 'Your Portal' : title}
                     </h3>
 
                     <p className="mt-1 text-xs text-slate-500">
@@ -641,7 +646,7 @@ export default function HomePage() {
                 </h2>
 
                 <p className="mt-4 leading-7 text-slate-600">
-                  Browse services currently available through GovFlow.
+                  Browse services currently available through govflow.
                   Information below is loaded directly from the live
                   backend.
                 </p>
@@ -649,11 +654,11 @@ export default function HomePage() {
 
               {user && (
                 <Link
-                  to="/login?forced=1"
-                  onClick={handleForceLogin}
+                  to={dashboardPath}
+                  onClick={handlePortalAccess}
                   className="inline-flex items-center gap-2 text-sm font-bold text-[#173b67]"
                 >
-                  Open citizen portal
+                  {user.role === 'citizen' ? 'Open citizen portal' : 'Open workspace'}
                   <ArrowUpRight size={16} />
                 </Link>
               )}
@@ -768,7 +773,7 @@ export default function HomePage() {
 
                       <p className="mt-4 min-h-[72px] text-sm leading-6 text-slate-600">
                         {service.description ||
-                          'Government service available through GovFlow.'}
+                          'Government service available through govflow.'}
                       </p>
 
                       <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
@@ -808,11 +813,11 @@ export default function HomePage() {
 
                       <div className="mt-auto border-t border-slate-100 pt-5">
                         <Link
-                          to="/login?forced=1"
-                          onClick={handleForceLogin}
+                          to={user ? serviceAccessPath : '/login'}
+                          onClick={handlePortalAccess}
                           className="inline-flex items-center gap-2 text-sm font-bold text-[#173b67] transition group-hover:text-blue-700"
                         >
-                          Sign in to continue
+                          {user ? 'Continue to service' : 'Sign in to continue'}
 
                           <ArrowRight size={16} />
                         </Link>
@@ -843,7 +848,7 @@ export default function HomePage() {
               </h2>
 
               <p className="mt-4 leading-7 text-slate-600">
-                GovFlow provides a common digital experience for citizens
+                govflow provides a common digital experience for citizens
                 accessing services from participating departments.
               </p>
             </div>
@@ -900,7 +905,7 @@ export default function HomePage() {
 
               <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
                 From discovering a service to tracking your progress,
-                GovFlow keeps the important information in one place.
+                govflow keeps the important information in one place.
               </p>
             </div>
 
@@ -942,7 +947,7 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">
-                Why GovFlow
+                Why govflow
               </p>
 
               <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -950,7 +955,7 @@ export default function HomePage() {
               </h2>
 
               <p className="mt-4 leading-7 text-blue-100">
-                GovFlow focuses on making public-service information
+                govflow focuses on making public-service information
                 easier to understand and government service operations
                 easier to manage.
               </p>
@@ -1002,7 +1007,7 @@ export default function HomePage() {
                 </h2>
 
                 <p className="mt-4 leading-7 text-slate-600">
-                  GovFlow is being prepared to use historical operational
+                  govflow is being prepared to use historical operational
                   data to forecast future service demand, queue pressure
                   and waiting times.
                 </p>
@@ -1101,7 +1106,7 @@ export default function HomePage() {
                 </h2>
 
                 <p className="mt-5 max-w-xl leading-7 text-slate-600">
-                  GovFlow separates citizen, staff and administrative
+                  govflow separates citizen, staff and administrative
                   operations through protected authentication and
                   role-based access.
                 </p>
@@ -1186,12 +1191,13 @@ export default function HomePage() {
                 </p>
 
                 <h2 className="mt-3 text-2xl font-bold text-slate-950 sm:text-3xl">
-                  Need help using GovFlow?
+                  Need help using govflow?
                 </h2>
 
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
-                  Start by exploring the service directory or create an
-                  account to access the citizen portal.
+                  {user
+                    ? 'Explore the service directory or return to your govflow workspace.'
+                    : 'Start by exploring the service directory or create an account to access the citizen portal.'}
                 </p>
               </div>
 
@@ -1205,10 +1211,10 @@ export default function HomePage() {
                 </a>
 
                 <Link
-                  to="/register"
+                  to={user ? dashboardPath : '/register'}
                   className="rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-[#173b67]"
                 >
-                  Create account
+                  {user ? 'Open portal' : 'Create account'}
                 </Link>
               </div>
             </div>
@@ -1232,25 +1238,26 @@ export default function HomePage() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl leading-7 text-blue-100">
-              Create your GovFlow account or sign in to continue to the
-              citizen portal.
+              {user
+                ? 'Open your govflow workspace to continue managing public services.'
+                : 'Create your govflow account or sign in to continue to the citizen portal.'}
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
-                to="/register"
+                to={user ? dashboardPath : '/register'}
                 className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3 font-bold text-[#173b67] transition hover:bg-blue-50"
               >
-                Create Account
+                {user ? 'Open portal' : 'Create Account'}
                 <ArrowRight size={18} />
               </Link>
 
               <Link
-                to="/login?forced=1"
-                onClick={handleForceLogin}
+                to={user ? dashboardPath : '/login'}
+                onClick={handlePortalAccess}
                 className="rounded-md border border-blue-400/40 bg-transparent px-6 py-3 font-bold text-white transition hover:bg-white/10"
               >
-                Sign In
+                {user ? 'Dashboard' : 'Sign In'}
               </Link>
             </div>
           </div>
@@ -1266,13 +1273,13 @@ export default function HomePage() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-md bg-white font-bold text-[#173b67]">
-                  G
+                <div className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-[#173b67]">
+                  <Workflow size={20} />
                 </div>
 
                 <div>
                   <div className="font-bold text-white">
-                    GovFlow
+                    govflow
                   </div>
 
                   <div className="text-[9px] uppercase tracking-[0.18em] text-blue-200">
@@ -1325,27 +1332,20 @@ export default function HomePage() {
 
               <div className="mt-4 flex flex-col gap-3 text-sm text-slate-300">
                 <Link
-                  to="/login?forced=1"
-                  onClick={handleForceLogin}
+                  to={user ? dashboardPath : '/login'}
+                  onClick={handlePortalAccess}
                   className="hover:text-white"
                 >
-                  Sign In
+                  {user ? 'Dashboard' : 'Sign In'}
                 </Link>
 
-                <Link
-                  to="/register"
-                  className="hover:text-white"
-                >
-                  Create Account
-                </Link>
-
-                {user && (
-                  <Link
-                    to="/login?forced=1"
-                    onClick={handleForceLogin}
-                    className="hover:text-white"
-                  >
-                    Citizen Portal
+                {user ? (
+                  <Link to={dashboardPath} className="hover:text-white">
+                    Open portal
+                  </Link>
+                ) : (
+                  <Link to="/register" className="hover:text-white">
+                    Create Account
                   </Link>
                 )}
               </div>
@@ -1384,7 +1384,7 @@ export default function HomePage() {
 
           <div className="mt-10 flex flex-col gap-4 border-t border-slate-700 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © 2026 GovFlow. Digital Public Services Platform.
+              © 2026 govflow. Digital Public Services Platform.
             </p>
 
             <div className="flex flex-wrap gap-5">

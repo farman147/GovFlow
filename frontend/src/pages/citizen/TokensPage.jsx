@@ -348,7 +348,7 @@ export default function TokensPage() {
         {loading ? (
           <LoadingState
             title="Loading your tokens"
-            message="Fetching your latest queue activity from GovFlow."
+            message="Fetching your latest queue activity from govflow."
           />
         ) : error ? (
           <ErrorState

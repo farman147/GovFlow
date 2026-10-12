@@ -7,6 +7,7 @@ import {
   Send,
   Sparkles,
   Ticket,
+  Workflow,
   X,
 } from 'lucide-react';
 
@@ -42,7 +43,7 @@ export default function AssistantPage() {
     {
       id: 'welcome-1',
       sender: 'assistant',
-      text: `Hello! I am your GovFlow Civic AI Assistant.
+      text: `Hello! I am your govflow Assistant.
 
 I can help you find information about government services, required documents, fees, eligibility, live queues, appointments and service information.
 
@@ -226,7 +227,7 @@ How can I help you today?`,
         sender: 'assistant',
         text: `Conversation cleared.
 
-How can I help you with GovFlow services today?`,
+How can I help you with govflow services today?`,
         quickPrompts: initialSuggestions,
         timestamp: new Date().toLocaleTimeString([], {
           hour: '2-digit',
@@ -313,8 +314,8 @@ How can I help you with GovFlow services today?`,
 
   return (
     <DashboardLayout
-      title="Civic AI Assistant"
-      subtitle="Ask questions about government services and get information from GovFlow."
+      title="govflow Assistant"
+      subtitle="Ask questions about government services and get information from govflow."
     >
       <div className="space-y-6">
 
@@ -340,13 +341,13 @@ How can I help you with GovFlow services today?`,
           <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-200">
-                <Bot size={28} />
+                <Workflow size={28} />
               </div>
 
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-xl font-bold text-slate-900">
-                    GovFlow Civic AI
+                    govflow Assistant
                   </h2>
 
                   <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
@@ -457,7 +458,7 @@ How can I help you with GovFlow services today?`,
 
               <div>
                 <p className="text-sm font-bold text-slate-900">
-                  Ask GovFlow
+                  Ask govflow
                 </p>
 
                 <p className="text-xs text-slate-500">
@@ -506,7 +507,7 @@ How can I help you with GovFlow services today?`,
                     >
                       {msg.sender === 'user'
                         ? 'You'
-                        : 'Civic AI'}
+                        : 'govflow'}
                     </span>
 
                     <span
@@ -677,7 +678,7 @@ How can I help you with GovFlow services today?`,
                     <span className="h-2 w-2 animate-bounce rounded-full bg-emerald-500 [animation-delay:0.3s]" />
 
                     <span className="ml-2 text-xs text-slate-500">
-                      GovFlow is processing your request...
+                      govflow is processing your request...
                     </span>
                   </div>
                 </div>
@@ -716,7 +717,7 @@ How can I help you with GovFlow services today?`,
 
             <div className="mt-3 flex items-center justify-center gap-2 text-[10px] text-slate-400">
               <CheckCircle2 size={12} />
-              GovFlow uses available service data to answer your questions.
+              govflow uses available service data to answer your questions.
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Bot, MessageSquare, Send, Sparkles, X, ChevronUp, Ticket } from 'lucide-react';
+import { MessageSquare, Send, Sparkles, Workflow, X, ChevronUp, Ticket } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { queryAssistant } from '../../api/assistantService';
 
@@ -39,7 +39,7 @@ export default function FloatingAssistantWidget() {
 
     try {
       const res = await queryAssistant({ query: q });
-      const answer = res.data?.data?.answer || "Here is the information from GovFlow.";
+      const answer = res.data?.data?.answer || "Here is the information from govflow.";
       const assistantMsg = {
         id: Date.now() + 1,
         sender: 'assistant',
@@ -54,7 +54,7 @@ export default function FloatingAssistantWidget() {
         {
           id: Date.now() + 1,
           sender: 'assistant',
-          text: "I was unable to retrieve data right now. Please try again or open the full Civic AI Assistant page."
+          text: "I was unable to retrieve data right now. Please try again or open the full govflow Assistant page."
         }
       ]);
     } finally {
@@ -73,7 +73,7 @@ export default function FloatingAssistantWidget() {
           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20">
             <Sparkles size={14} className="text-white animate-pulse" />
           </div>
-          <span className="text-sm">Ask Civic AI</span>
+          <span className="text-sm">Ask govflow</span>
         </button>
       ) : (
         <div className="flex h-[500px] w-[350px] sm:w-[380px] flex-col rounded-3xl border border-slate-200 bg-white shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5">
@@ -81,10 +81,10 @@ export default function FloatingAssistantWidget() {
           <div className="flex items-center justify-between bg-gradient-to-r from-emerald-600 to-emerald-700 px-4 py-3 text-white">
             <div className="flex items-center gap-2">
               <div className="rounded-xl bg-white/20 p-1.5">
-                <Bot size={18} />
+                <Workflow size={18} />
               </div>
               <div>
-                <h4 className="text-sm font-bold leading-tight">Civic AI Assistant</h4>
+                <h4 className="text-sm font-bold leading-tight">govflow Assistant</h4>
                 <p className="text-[10px] text-emerald-100">Live DB & TFT Forecasts</p>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { BarChart3, BriefcaseBusiness, LayoutGrid, LogOut, RefreshCcw, UserCircle2, Users } from 'lucide-react';
+import { BarChart3, BriefcaseBusiness, LayoutGrid, LogOut, RefreshCcw, UserCircle2, Users, Workflow } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
@@ -18,9 +18,11 @@ export default function StaffDashboardLayout({ title, subtitle, children, onRefr
       <div className="mx-auto flex max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <aside className="hidden w-72 shrink-0 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm lg:block">
           <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-sm font-bold text-white">G</div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-sm">
+              <Workflow size={20} />
+            </div>
             <div>
-              <div className="text-lg font-semibold text-slate-900">GovFlow</div>
+              <div className="text-lg font-semibold text-slate-900">govflow</div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Staff Portal</div>
             </div>
           </div>
@@ -61,6 +63,25 @@ export default function StaffDashboardLayout({ title, subtitle, children, onRefr
         </aside>
 
         <main className="flex-1">
+          <nav className="mb-4 flex gap-2 overflow-x-auto pb-1 lg:hidden" aria-label="Staff navigation">
+            {navItems.map(({ label, to, icon: Icon }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `flex shrink-0 items-center gap-2 rounded-lg border px-3 py-2.5 text-xs font-semibold transition ${
+                    isActive
+                      ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
+                      : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                  }`
+                }
+              >
+                <Icon size={15} />
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+
           <header className="rounded-3xl border border-slate-200 bg-white px-5 py-4 shadow-sm sm:px-6">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>

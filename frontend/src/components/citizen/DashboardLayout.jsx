@@ -1,4 +1,4 @@
-import { Bot, BriefcaseBusiness, Calendar, LayoutGrid, LogOut, Sparkles, Ticket } from 'lucide-react';
+import { BriefcaseBusiness, Calendar, LayoutGrid, LogOut, Sparkles, Ticket, Workflow } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import FloatingAssistantWidget from './FloatingAssistantWidget';
@@ -8,7 +8,7 @@ const navItems = [
   { label: 'Services', to: '/citizen/services', icon: BriefcaseBusiness },
   { label: 'My Appointments', to: '/citizen/appointments', icon: Calendar },
   { label: 'My Tokens', to: '/citizen/tokens', icon: Ticket },
-  { label: 'Civic AI Assistant', to: '/citizen/assistant', icon: Sparkles, badge: 'AI' },
+  { label: 'govflow Assistant', to: '/citizen/assistant', icon: Sparkles, badge: 'AI' },
 ];
 
 export default function DashboardLayout({ title, subtitle, children }) {
@@ -19,9 +19,11 @@ export default function DashboardLayout({ title, subtitle, children }) {
       <div className="mx-auto flex max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <aside className="hidden w-72 shrink-0 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm lg:block">
           <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-sm font-bold text-white shadow-sm">G</div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-sm">
+              <Workflow size={20} />
+            </div>
             <div>
-              <div className="text-lg font-semibold text-slate-900">GovFlow</div>
+              <div className="text-lg font-semibold text-slate-900">govflow</div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Citizen Portal</div>
             </div>
           </div>
@@ -69,6 +71,25 @@ export default function DashboardLayout({ title, subtitle, children }) {
         </aside>
 
         <main className="flex-1">
+          <nav className="mb-4 flex gap-2 overflow-x-auto pb-1 lg:hidden" aria-label="Citizen navigation">
+            {navItems.map(({ label, to, icon: Icon }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `flex shrink-0 items-center gap-2 rounded-lg border px-3 py-2.5 text-xs font-semibold transition ${
+                    isActive
+                      ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
+                      : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                  }`
+                }
+              >
+                <Icon size={15} />
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+
           <header className="rounded-3xl border border-slate-200 bg-white px-5 py-4 shadow-sm sm:px-6">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>

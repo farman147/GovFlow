@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Activity, AlertCircle, BriefcaseBusiness, Building2, CalendarDays, Clock3, LogOut, Pencil, Plus, RefreshCw, Search, ShieldCheck, Users, X } from 'lucide-react';
 import { getServices, updateService } from '../../api/serviceService';
 import { getCounters, createCounter, updateCounter, assignCounterStaff, updateCounterStatus } from '../../api/counterService';
-import { getAdminDashboard, resetStaffPassword } from '../../api/adminService';
+import { createAdminAccount, getAdminDashboard, resetStaffPassword } from '../../api/adminService';
 import api from '../../api/axios';
 import { getApiErrorMessage } from '../../api/axios';
 import { createServiceWithStaff } from '../../api/adminService';
@@ -170,7 +170,7 @@ export default function AdminWorkspace({ activeSection, onNavigate, user, logout
   };
   const saveStaff = async (event) => {
     event.preventDefault(); setSaving(true);
-    try { await register(staffForm); setModal(''); setStaffForm(blankStaff); flash(`${staffForm.role === 'admin' ? 'Admin' : 'Staff'} account created.`); await load(); }
+    try { await createAdminAccount({ ...staffForm, email: staffForm.email.trim().toLowerCase() }); setModal(''); setStaffForm(blankStaff); flash(`${staffForm.role === 'admin' ? 'Admin' : 'Staff'} account created.`); await load(); }
     catch (error) { flash(getApiErrorMessage(error, 'Unable to create this account.'), true); } finally { setSaving(false); }
   };
   const saveStaffPassword = async (event) => {
@@ -203,7 +203,7 @@ export default function AdminWorkspace({ activeSection, onNavigate, user, logout
   return <div className="min-h-screen bg-slate-50 text-slate-800">
     <div className="mx-auto max-w-[1480px] px-4 py-6 sm:px-6 lg:px-8">
       <header className={`${card} mb-5 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between`}>
-        <div><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-700"><ShieldCheck size={16}/> GovFlow Administration</div><h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">{pageTitle}</h1><p className="mt-1 text-sm text-slate-500">Manage public services and daily operations from one workspace.</p></div>
+        <div><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-700"><ShieldCheck size={16}/> govflow Administration</div><h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">{pageTitle}</h1><p className="mt-1 text-sm text-slate-500">Manage public services and daily operations from one workspace.</p></div>
         <div className="flex items-center gap-3"><div className="hidden text-right sm:block"><p className="text-xs text-slate-500">Signed in as</p><p className="text-sm font-semibold text-slate-800">{user?.name || 'Administrator'}</p></div><button onClick={load} className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm font-semibold hover:bg-slate-50"><RefreshCw size={15}/> Refresh</button><button onClick={() => logout(true)} className="inline-flex items-center gap-2 rounded-xl border border-rose-200 bg-white px-3.5 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-50"><LogOut size={15}/> Log out</button></div>
       </header>
       <nav className="mb-5 grid grid-cols-2 gap-2 rounded-2xl border border-slate-200 bg-white p-2 shadow-sm md:grid-cols-6" aria-label="Admin sections">

@@ -256,7 +256,7 @@ export default function AdminDashboardPage({ initialSection = 'overview' }) {
                 </div>
 
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700">
-                  GovFlow Administration
+                  govflow Administration
                 </p>
               </div>
 
@@ -322,7 +322,7 @@ export default function AdminDashboardPage({ initialSection = 'overview' }) {
             </h2>
 
             <p className="mt-1 text-sm text-slate-500">
-              Fetching live GovFlow operational data.
+              Fetching live govflow operational data.
             </p>
           </div>
         ) : error ? (
@@ -601,7 +601,7 @@ export default function AdminDashboardPage({ initialSection = 'overview' }) {
                       </h2>
 
                       <p className="mt-1 text-sm text-slate-500">
-                        Demand prediction data returned by the GovFlow AI backend.
+                        Demand prediction data returned by the govflow AI backend.
                       </p>
                     </div>
                   </div>
