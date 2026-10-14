@@ -150,6 +150,7 @@ export default function HomePage() {
     : user?.role === 'staff'
       ? '/staff/dashboard'
       : '/citizen/dashboard';
+  const portalLoginPath = '/login?forced=1';
   const serviceAccessPath = user?.role === 'citizen'
     ? '/citizen/services'
     : dashboardPath;
@@ -319,7 +320,7 @@ export default function HomePage() {
             </Link>
 
             <Link
-              to={user ? dashboardPath : '/register'}
+              to={user ? portalLoginPath : '/register'}
               className="rounded-md bg-[#173b67] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#102d50]"
             >
               {user ? 'Open portal' : 'Register'}
@@ -391,7 +392,7 @@ export default function HomePage() {
                 </Link>
 
                 <Link
-                  to={user ? dashboardPath : '/register'}
+                  to={user ? portalLoginPath : '/register'}
                   onClick={closeMobileMenu}
                   className="rounded-md bg-[#173b67] px-3 py-2.5 text-center text-sm font-semibold text-white"
                 >
@@ -442,7 +443,7 @@ export default function HomePage() {
                 </a>
 
                 <Link
-                  to={user ? dashboardPath : '/register'}
+                  to={user ? portalLoginPath : '/register'}
                   className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-6 py-3.5 text-sm font-bold text-[#173b67] transition hover:border-[#173b67] hover:bg-blue-50"
                 >
                   {user ? 'Open portal' : 'Create Account'}
@@ -1211,7 +1212,7 @@ export default function HomePage() {
                 </a>
 
                 <Link
-                  to={user ? dashboardPath : '/register'}
+                  to={user ? portalLoginPath : '/register'}
                   className="rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-[#173b67]"
                 >
                   {user ? 'Open portal' : 'Create account'}
@@ -1245,7 +1246,7 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
-                to={user ? dashboardPath : '/register'}
+                to={user ? portalLoginPath : '/register'}
                 className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3 font-bold text-[#173b67] transition hover:bg-blue-50"
               >
                 {user ? 'Open portal' : 'Create Account'}
@@ -1340,7 +1341,7 @@ export default function HomePage() {
                 </Link>
 
                 {user ? (
-                  <Link to={dashboardPath} className="hover:text-white">
+                  <Link to={portalLoginPath} className="hover:text-white">
                     Open portal
                   </Link>
                 ) : (
